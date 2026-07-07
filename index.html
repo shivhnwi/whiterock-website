@@ -53,7 +53,18 @@
     padding:0.7rem clamp(1.5rem,5vw,4rem);
     box-shadow:0 1px 0 var(--line);
   }
-  nav .brand img{height:34px;width:auto}
+  nav .brand{display:flex;align-items:center;perspective:600px}
+  .logo3d{
+    height:38px;width:auto;display:block;
+    filter:drop-shadow(0 5px 9px rgba(0,0,0,0.35));
+    transition:transform .45s cubic-bezier(.22,.9,.3,1.2),filter .45s ease;
+    transform-style:preserve-3d;
+  }
+  nav .brand:hover .logo3d{
+    transform:rotateY(20deg) rotateX(8deg) translateY(-1px);
+    filter:drop-shadow(0 9px 14px rgba(0,0,0,0.45));
+  }
+  .foot-logo3d{height:44px;margin-bottom:1.2rem}
   nav .links{display:flex;gap:2.2rem;align-items:center}
   nav .links a{
     font-size:0.82rem;font-weight:500;letter-spacing:0.04em;color:rgba(244,241,234,0.82);
@@ -104,6 +115,27 @@
     display:flex;gap:2.5rem;align-items:center;font-size:0.7rem;letter-spacing:0.22em;
     text-transform:uppercase;color:rgba(244,241,234,0.55);opacity:0;animation:fade 1.2s 1.1s ease forwards;
   }
+
+  /* ---------- COVERAGE MARQUEE ---------- */
+  .coverage{
+    background:var(--emerald-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:1.8rem 0 1.9rem;overflow:hidden;
+  }
+  .coverage .cap{
+    text-align:center;font-size:0.66rem;letter-spacing:0.26em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:1.3rem;opacity:0.9;
+  }
+  .coverage .cap span{color:rgba(244,241,234,0.45);font-weight:400}
+  .marquee{display:flex;width:max-content;animation:scroll 60s linear infinite}
+  .marquee:hover{animation-play-state:paused}
+  .marquee .track{display:flex;align-items:center}
+  .marquee .firm{
+    font-family:'Playfair Display',serif;font-size:1.15rem;color:rgba(244,241,234,0.7);
+    font-weight:500;padding:0 2.2rem;white-space:nowrap;letter-spacing:0.01em;
+    border-right:1px solid rgba(200,169,107,0.15);transition:color .3s;
+  }
+  .marquee .firm:hover{color:var(--gold)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   /* ---------- SECTION SCAFFOLD ---------- */
   section{padding:clamp(4.5rem,9vw,8rem) clamp(1.5rem,5vw,4rem)}
@@ -234,6 +266,115 @@
   .foot-bottom{max-width:1180px;margin:1.8rem auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:0.76rem;color:rgba(244,241,234,0.4)}
   .foot-bottom .cities{letter-spacing:0.2em;text-transform:uppercase}
 
+
+  /* ---------- FONT PRECISION & CLARITY ---------- */
+  body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
+  :root{--grey:#525A50}
+  .hero .lede,.section-head p,.div-card p,.step p,.intel-panel p,
+  .founder-text p,.contact p,.intel-list .item,footer .foot-brand p{font-weight:400}
+  nav .links a{color:rgba(244,241,234,0.92);font-weight:500}
+  .hero .lede{color:rgba(244,241,234,0.9)}
+  .dark .section-head p,.deep .section-head p{color:rgba(244,241,234,0.82)}
+
+  /* ---------- INTERACTIVE CHART ---------- */
+  .intel-panel{position:relative}
+  .chart-tabs{display:flex;gap:0.5rem;margin-top:1.4rem;flex-wrap:wrap}
+  .chart-tabs button{
+    background:none;border:1px solid var(--line);color:rgba(244,241,234,0.75);
+    font-family:'Poppins';font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+    padding:0.4rem 0.85rem;border-radius:2px;cursor:pointer;transition:.25s;font-weight:500;
+  }
+  .chart-tabs button:hover{border-color:var(--gold);color:var(--gold)}
+  .chart-tabs button.on{background:var(--gold);border-color:var(--gold);color:var(--emerald-deep)}
+  .mini-chart{margin-top:1.1rem}
+  .mini-chart span{cursor:pointer;transition:height .8s cubic-bezier(.22,.9,.3,1),filter .25s}
+  .mini-chart span:hover{filter:brightness(1.35) drop-shadow(0 0 8px rgba(217,194,145,.6))}
+  .chart-axis{display:flex;justify-content:space-between;font-size:0.58rem;letter-spacing:0.06em;
+    color:rgba(244,241,234,0.45);margin:0.35rem 2px 0.4rem;text-transform:uppercase}
+  .chart-tip{
+    position:absolute;pointer-events:none;background:rgba(6,29,23,0.97);border:1px solid var(--gold);
+    padding:0.45rem 0.75rem;border-radius:3px;font-size:0.76rem;color:var(--cream);opacity:0;
+    transition:opacity .2s;transform:translate(-50%,-115%);white-space:nowrap;z-index:5;
+  }
+  .chart-tip b{color:var(--gold-soft)}
+
+  /* ---------- 3D CITY ---------- */
+  .city-wrap{position:relative;max-width:1180px;margin:0 auto;height:clamp(340px,52vw,560px);
+    cursor:grab;touch-action:pan-y;user-select:none}
+  .city-wrap:active{cursor:grabbing}
+  #city{width:100%;height:100%;display:block}
+  .city-tip{
+    position:absolute;pointer-events:none;background:rgba(6,29,23,0.97);border:1px solid var(--line);
+    border-left:2px solid var(--gold);padding:0.7rem 1rem;border-radius:3px;font-size:0.78rem;
+    color:rgba(244,241,234,0.85);opacity:0;transition:opacity .2s;transform:translate(-50%,-112%);
+    white-space:nowrap;line-height:1.5;
+  }
+  .city-tip b{display:block;font-family:'Playfair Display',serif;font-size:0.98rem;color:var(--gold-soft);font-weight:600}
+  .city-hint{
+    position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+    font-size:0.62rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(244,241,234,0.42);
+  }
+  .div-card{will-change:transform}
+
+
+  /* ---------- LUXURY POLISH ---------- */
+  ::selection{background:var(--gold);color:var(--emerald-deep)}
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:var(--emerald-deep)}
+  ::-webkit-scrollbar-thumb{background:#3d5c4c;border-radius:5px;border:2px solid var(--emerald-deep)}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+  .hero h1 em{
+    background:linear-gradient(100deg,#E8D5A6 0%,#C8A96B 40%,#F0E1BC 68%,#B4924F 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  }
+  nav .links a:not(.cta)::after{
+    content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-soft));transition:width .35s ease;
+  }
+  nav .links a:not(.cta):hover::after{width:100%}
+  .btn{position:relative;overflow:hidden}
+  .btn-gold::before{
+    content:"";position:absolute;top:0;left:-80%;width:45%;height:100%;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,0.55),transparent);
+    transform:skewX(-20deg);transition:left .6s ease;
+  }
+  .btn-gold:hover::before{left:140%}
+  .coverage{position:relative}
+  .coverage::before,.coverage::after{
+    content:"";position:absolute;top:0;bottom:0;width:clamp(60px,12vw,160px);z-index:2;pointer-events:none;
+  }
+  .coverage::before{left:0;background:linear-gradient(90deg,var(--emerald-deep),transparent)}
+  .coverage::after{right:0;background:linear-gradient(270deg,var(--emerald-deep),transparent)}
+  .section-head .eyebrow::before{
+    content:"";display:inline-block;width:28px;height:1px;background:var(--gold);
+    margin-right:0.7rem;vertical-align:middle;opacity:0.85;
+  }
+  .div-card::after{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-soft) 45%,transparent);
+    transform:scaleX(0);transform-origin:left;transition:transform .5s ease;
+  }
+  .div-card:hover::after{transform:scaleX(1)}
+  .div-card:hover{box-shadow:0 26px 60px rgba(9,40,32,0.16)}
+  .city-wrap::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 58%,transparent 52%,rgba(6,29,23,0.6) 100%);
+  }
+  .founder-card{box-shadow:0 30px 70px rgba(9,40,32,0.25)}
+  .intel-panel{box-shadow:0 20px 50px rgba(0,0,0,0.25)}
+
+  /* ---------- DIVISIONS RANGE ---------- */
+  .range-wrap{position:relative;height:clamp(220px,32vw,330px);margin:-0.5rem 0 2.6rem;cursor:pointer}
+  #range{width:100%;height:100%;display:block}
+  .range-tip{
+    position:absolute;pointer-events:none;background:rgba(6,29,23,0.97);border:1px solid var(--line);
+    border-left:2px solid var(--gold);padding:0.6rem 0.95rem;border-radius:3px;font-size:0.78rem;
+    color:rgba(244,241,234,0.85);opacity:0;transition:opacity .2s;transform:translate(-50%,-115%);
+    white-space:nowrap;line-height:1.5;z-index:3;
+  }
+  .range-tip b{display:block;font-family:'Playfair Display',serif;font-size:0.96rem;color:var(--gold-soft);font-weight:600}
+  .div-card.flash{box-shadow:0 0 0 2px var(--gold),0 26px 60px rgba(9,40,32,0.2)!important;transform:translateY(-4px)}
+
   /* ---------- ANIMATIONS ---------- */
   @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -270,13 +411,16 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="brand" href="#top"><img id="navlogo" alt="White Rock Wealth Management"></a>
+    <a class="brand" href="#top" aria-label="White Rock Wealth Management — Home">
+    <img id="navlogo" class="logo3d" alt="White Rock emblem">
+  </a>
   <div class="links" id="links">
     <a href="#platform">Platform</a>
     <a href="#divisions">Divisions</a>
     <a href="#intelligence">Intelligence</a>
     <a href="#approach">Approach</a>
     <a href="#founder">Founder</a>
+    <a href="insights.html">Insights</a>
     <a class="cta" href="#contact">Request Access</a>
   </div>
   <button class="menu-toggle" id="toggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -288,7 +432,7 @@
   <div class="hero-inner">
     <div class="eyebrow">Private Capital Intelligence &amp; Wealth Deployment</div>
     <h1>We see where capital moves <em>before the market does.</em></h1>
-    <p class="lede">White Rock is a Canadian private capital platform for ultra-high-net-worth families, founders, and institutions — combining proprietary intelligence, off-market access, and multi-asset execution under one roof.</p>
+    <p class="lede">A Canadian private capital platform for families, founders, and institutions. Proprietary intelligence. Off-market access. Multi-asset execution.</p>
     <div class="hero-cta">
       <a class="btn btn-gold" href="#contact">Request Access</a>
       <a class="btn btn-ghost" href="#platform">Explore the Platform</a>
@@ -298,6 +442,12 @@
     <span>Toronto</span><span>•</span><span>Monaco</span><span>•</span><span>Delhi</span>
   </div>
 </header>
+
+<!-- COVERAGE MARQUEE -->
+<section class="coverage">
+  <div class="cap">Market Coverage — <span>the institutions White Rock Intelligence tracks</span></div>
+  <div class="marquee" id="marquee"></div>
+</section>
 
 <!-- THESIS STRIP -->
 <section class="thesis">
@@ -313,7 +463,7 @@
     <div class="section-head">
       <div class="eyebrow">The Platform</div>
       <h2>The intelligence layer between wealth creation and wealth allocation.</h2>
-      <p>Traditional wealth managers optimise portfolios of stocks and bonds. Brokerages execute property transactions. White Rock does neither in isolation — it sits at the intersection of capital, operating businesses, real assets, and private markets, directing capital with an edge the market hasn't yet priced.</p>
+      <p>Wealth managers optimise stocks and bonds. Brokerages execute property deals. We do neither in isolation — we direct capital across real assets and private markets with an edge the market hasn't yet priced.</p>
     </div>
     <div class="steps">
       <div class="step"><h4>Intelligence</h4><p>Proprietary research on where institutional and private capital is flowing across Canada and select global markets.</p></div>
@@ -332,37 +482,59 @@
       <h2>One platform, four specialised arms.</h2>
       <p>A parent platform that owns the relationship and the intelligence — with divisions that originate and execute across the private capital landscape.</p>
     </div>
+    <div class="range-wrap">
+      <canvas id="range"></canvas>
+      <div class="range-tip" id="rangetip"></div>
+      <div class="city-hint" style="bottom:6px">One range · Four arms — hover a peak, click to explore</div>
+    </div>
     <div class="div-grid">
       <div class="div-card">
         <img class="corner" id="c1" alt="">
         <div class="num">01</div>
         <h3>White Rock Wealth Management</h3>
         <div class="role">Parent Platform</div>
-        <p>Advisory, intelligence, and capital allocation for UHNW individuals, family offices, founders, and institutions. The central layer that owns strategy and routes capital to where it works hardest.</p>
+        <p>Advisory, intelligence, and capital allocation. The central layer that owns strategy and routes capital where it works hardest.</p>
         <ul><li>Advisory retainers</li><li>Allocation strategy</li><li>Platform access</li></ul>
       </div>
       <div class="div-card">
         <div class="num">02</div>
         <h3>White Rock Commercial Realty</h3>
         <div class="role">Regulated Execution Arm</div>
-        <p>Off-market real estate and portfolio advisory across industrial, multi-family, retail, hospitality, and development land — one channel through which capital is deployed, not the identity of the group.</p>
+        <p>Off-market real estate and portfolio advisory. One channel for capital — not the identity of the group.</p>
         <ul><li>Industrial</li><li>Multi-family</li><li>Retail</li><li>Hospitality</li><li>Development land</li><li>Off-market</li></ul>
       </div>
       <div class="div-card">
         <div class="num">03</div>
         <h3>White Rock Private Capital</h3>
         <div class="role">Private Markets</div>
-        <p>Access to private opportunities across venture, growth equity, private credit, structured finance, and co-investments — with family-office capital placement at the core.</p>
+        <p>Access to private opportunities across venture, growth, credit, and co-investments. Family-office capital at the core.</p>
         <ul><li>Venture &amp; growth</li><li>Private credit</li><li>Co-investments</li><li>JV &amp; structured</li></ul>
       </div>
       <div class="div-card">
         <div class="num">04</div>
         <h3>White Rock Intelligence</h3>
         <div class="role">Proprietary Research</div>
-        <p>The defensible edge of the platform — mapping capital flows, institutional activity, and private-market deployment into a coherent view of where allocation is heading next.</p>
+        <p>The platform's defensible edge. Mapping capital flows into a clear view of where allocation heads next.</p>
         <ul><li>Capital-flow maps</li><li>Deal intelligence</li><li>Premium research</li></ul>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- SKYLINE — 3D INTERACTIVE -->
+<section id="skyline" class="deep" style="padding-bottom:clamp(3rem,6vw,5rem)">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:2.2rem">
+      <div class="eyebrow">Commercial Realty — Interactive</div>
+      <h2>The skyline, read as capital.</h2>
+      <p>Every tower is a thesis. Drag to orbit the market; hover a building to see how White Rock reads an asset.</p>
+    </div>
+  </div>
+  <div class="city-wrap">
+    <canvas id="city"></canvas>
+    <div class="city-tip" id="citytip"></div>
+    <div class="city-hint">Drag to rotate &nbsp;·&nbsp; Hover a building</div>
   </div>
 </section>
 
@@ -391,8 +563,11 @@
         <div class="label">Canada Capital Flow Index</div>
         <div class="title">Where capital is moving this quarter</div>
         <p>A proprietary read on the direction and velocity of private capital across Canadian markets — distilled for decision-makers, not analysts.</p>
+        <div class="chart-tabs" id="charttabs"></div>
         <div class="mini-chart" id="chart"></div>
-        <div class="label" style="color:rgba(244,241,234,0.45)">Illustrative · Quarterly briefing</div>
+        <div class="chart-axis" id="chartaxis"></div>
+        <div class="chart-tip" id="charttip"></div>
+        <div class="label" style="color:rgba(244,241,234,0.45)">Illustrative · Quarterly briefing · Hover a bar</div>
       </div>
     </div>
   </div>
@@ -463,6 +638,18 @@
   </div>
 </section>
 
+<!-- INSIGHTS PREVIEW -->
+<section id="insights-preview" class="deep" style="text-align:center">
+  <div class="wrap" style="max-width:720px">
+    <div class="eyebrow" style="display:block">The Private Wealth</div>
+    <h2 class="serif" style="font-size:clamp(1.9rem,4vw,2.9rem);color:var(--cream);margin:1rem 0 1.1rem">
+      A podcast and newsletter on private capital.</h2>
+    <p style="color:rgba(244,241,234,0.72);font-weight:300;margin-bottom:2rem">
+      Who's raising. Who's deploying. Where the smart money is moving — read by allocators and founders.</p>
+    <a class="btn btn-gold" href="insights.html">Explore The Private Wealth</a>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" class="contact">
   <div class="wrap">
@@ -500,7 +687,7 @@
 <footer>
   <div class="foot-grid">
     <div class="foot-brand">
-      <img id="footlogo" alt="White Rock Wealth Management">
+      <img id="footlogo" class="logo3d foot-logo3d" alt="White Rock emblem">
       <p>A Canadian private capital intelligence and wealth deployment platform.</p>
     </div>
     <div>
@@ -523,6 +710,7 @@
     <div>
       <h5>Connect</h5>
       <ul>
+        <li><a href="insights.html">The Private Wealth</a></li>
         <li><a href="#contact">Request Access</a></li>
         <li><a href="#contact">Enquiries</a></li>
       </ul>
@@ -536,22 +724,27 @@
 
 <script src="assets/logos.js"></script>
 <script>
-  // inject logos
-  document.getElementById('navlogo').src = LOGOS.logo_reversed;
-  document.getElementById('footlogo').src = LOGOS.logo_reversed;
-  document.getElementById('c1') && (document.getElementById('c1').src = LOGOS.mono_gold);
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- logos (mono emblem only — no wordmark) ----------
+  if (window.LOGOS) {
+    const nl = document.getElementById('navlogo'), fl = document.getElementById('footlogo'), c1 = document.getElementById('c1');
+    nl && (nl.src = LOGOS.mono_gold);
+    fl && (fl.src = LOGOS.mono_gold);
+    c1 && (c1.src = LOGOS.mono_gold);
+  }
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // nav scroll state
+  // ---------- nav scroll state ----------
   const nav = document.getElementById('nav');
   addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
 
-  // mobile menu
+  // ---------- mobile menu ----------
   const toggle = document.getElementById('toggle'), links = document.getElementById('links');
   toggle.addEventListener('click', () => links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-  // reveal on scroll
+  // ---------- reveal on scroll ----------
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
@@ -559,78 +752,521 @@
     el.classList.add('reveal'); el.style.transitionDelay = (i % 4 * 0.06) + 's'; io.observe(el);
   });
 
-  // mini chart bars
-  const chart = document.getElementById('chart');
-  const heights = [40,55,38,62,72,58,80,68,90,76];
-  heights.forEach((h, i) => {
-    const s = document.createElement('span');
-    s.style.height = h + '%'; s.style.animationDelay = (i * 0.08) + 's';
-    chart.appendChild(s);
-  });
+  // ---------- 3D tilt on division & approach cards ----------
+  if (!reduceMotion) {
+    document.querySelectorAll('.div-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(800px) rotateY(${px*7}deg) rotateX(${-py*7}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => card.style.transform = '');
+    });
+  }
 
-  // contact form (no backend — informational)
-  function handleSubmit(e){
+  // ---------- interactive intelligence chart (workable model) ----------
+  (function () {
+    const chart = document.getElementById('chart');
+    if (!chart) return;
+    const tabs = document.getElementById('charttabs');
+    const axis = document.getElementById('chartaxis');
+    const tip  = document.getElementById('charttip');
+    const quarters = ["Q1 '24","Q2 '24","Q3 '24","Q4 '24","Q1 '25","Q2 '25","Q3 '25","Q4 '25","Q1 '26","Q2 '26"];
+    const sets = {
+      'Real Assets':    [40,55,38,62,72,58,80,68,90,76],
+      'Private Credit': [28,40,48,45,60,66,57,72,70,84],
+      'Venture':        [64,48,40,36,44,52,49,63,71,79]
+    };
+    const bars = quarters.map((q, i) => {
+      const s = document.createElement('span');
+      s.style.height = '0%';
+      s.addEventListener('mouseenter', () => {
+        const cur = tabs.querySelector('.on').textContent;
+        tip.innerHTML = `<b>${q}</b> · ${cur} Index <b>${sets[cur][i]}</b>`;
+        const pr = chart.parentElement.getBoundingClientRect(), br = s.getBoundingClientRect();
+        tip.style.left = (br.left - pr.left + br.width / 2) + 'px';
+        tip.style.top  = (br.top - pr.top) + 'px';
+        tip.style.opacity = 1;
+      });
+      s.addEventListener('mouseleave', () => tip.style.opacity = 0);
+      chart.appendChild(s);
+      return s;
+    });
+    axis.innerHTML = `<span>${quarters[0]}</span><span>${quarters[4]}</span><span>${quarters[9]}</span>`;
+    function show(name) {
+      tabs.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.textContent === name));
+      sets[name].forEach((v, i) => setTimeout(() => bars[i].style.height = v + '%', i * 45));
+    }
+    Object.keys(sets).forEach(name => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = name;
+      b.addEventListener('click', () => show(name));
+      tabs.appendChild(b);
+    });
+    const start = () => show('Real Assets');
+    new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { start(); o.disconnect(); } }),
+      { threshold: 0.3 }).observe(chart);
+  })();
+
+  // ---------- coverage marquee ----------
+  const firms = [
+    "Blackstone","KKR","Brookfield","Apollo","The Carlyle Group","Bain Capital",
+    "CVC Capital","TPG","Warburg Pincus","Advent International","EQT","Vista Equity",
+    "Silver Lake","Thoma Bravo","General Atlantic","Hellman & Friedman","Permira",
+    "Ares Management","Sequoia Capital","Andreessen Horowitz","Tiger Global","Insight Partners",
+    "CPP Investments","CDPQ","OMERS","Ontario Teachers'","PSP Investments","BCI",
+    "GIC","Temasek","Mubadala","ADIA","PIF","Norges Bank IM",
+    "Goldman Sachs","Morgan Stanley","BlackRock","Macquarie","Oaktree","Partners Group",
+    "Cinven","BC Partners","Leonard Green","Clayton Dubilier & Rice","Francisco Partners",
+    "Onex","Brookfield Asset Mgmt","Fairfax","PointState","Dragoneer"
+  ];
+  const marquee = document.getElementById('marquee');
+  if (marquee) {
+    const make = () => {
+      const t = document.createElement('div'); t.className = 'track';
+      firms.forEach(f => { const s = document.createElement('span'); s.className = 'firm'; s.textContent = f; t.appendChild(s); });
+      return t;
+    };
+    marquee.appendChild(make()); marquee.appendChild(make());
+  }
+
+  // ---------- HERO: HD shaded 3D mountain range (cursor-reactive) ----------
+  (function () {
+    const canvas = document.getElementById('flow');
+    if (!canvas || reduceMotion) { if (canvas) canvas.style.display = 'none'; return; }
+    const ctx = canvas.getContext('2d');
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+    const COLS = 78, ROWS = 30;
+    let W, H, mx = 0, my = 0, smx = 0, smy = 0, t = 0;
+    const hash = (i, j) => { const s = Math.sin(i * 127.1 + j * 311.7) * 43758.5453; return s - Math.floor(s); };
+    const sstep = (a, b, u) => { u = u * u * (3 - 2 * u); return a + (b - a) * u; };
+    const vnoise = (x, y) => {
+      const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+      return sstep(sstep(hash(xi, yi), hash(xi + 1, yi), xf), sstep(hash(xi, yi + 1), hash(xi + 1, yi + 1), xf), yf);
+    };
+    const peak = (u, v, cu, cv, s) => { const dx = (u - cu) / s, dy = (v - cv) / s; return Math.exp(-(dx * dx + dy * dy)); };
+    const HM = [];
+    for (let j = 0; j <= ROWS; j++) {
+      HM[j] = [];
+      for (let i = 0; i <= COLS; i++) {
+        const u = i / COLS, v = j / ROWS;
+        let hg = vnoise(i * 0.13, j * 0.28) * 0.36 + vnoise(i * 0.38, j * 0.7) * 0.09;
+        hg += peak(u, v, 0.40, 0.52, 0.105) * 0.85 + peak(u, v, 0.62, 0.48, 0.135) * 1.05; // emblem peaks
+        HM[j][i] = hg;
+      }
+    }
+    // ambient gold motes
+    const motes = Array.from({ length: 36 }, () => ({
+      u: Math.random(), v: Math.random(), s: 0.4 + Math.random() * 0.6, sp: 0.0002 + Math.random() * 0.0005
+    }));
+    function resize() {
+      W = canvas.offsetWidth; H = canvas.offsetHeight;
+      canvas.width = W * DPR; canvas.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    function project(i, j, yaw) {
+      const x = (i / COLS - 0.5) * 2.8, z0 = (j / ROWS) * 3.2 + 0.8;
+      const c = Math.cos(yaw), s = Math.sin(yaw);
+      const xr = x * c - (z0 - 2.3) * s, zr = x * s + (z0 - 2.3) * c + 2.3;
+      const y = -HM[j][i] * 1.02 + 0.60 + smy * 0.12;
+      const k = (H * 1.08) / zr;
+      return { x: W / 2 + xr * k, y: H * 0.42 + y * k, z: zr };
+    }
+    const mixc = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
+    const BG = [9, 40, 32], DK = [8, 34, 26], MD = [24, 88, 64], GD = [200, 169, 107], SN = [240, 225, 188];
+    function draw() {
+      t += 0.0022;
+      smx += (mx - smx) * 0.06; smy += (my - smy) * 0.06;
+      const yaw = smx * 0.34 + Math.sin(t) * 0.04;
+      ctx.clearRect(0, 0, W, H);
+
+      // golden alpenglow behind the main peak
+      const pk = project(Math.round(COLS * 0.62), Math.round(ROWS * 0.48), yaw);
+      const glow = ctx.createRadialGradient(pk.x, pk.y, 0, pk.x, pk.y, H * 0.55);
+      glow.addColorStop(0, 'rgba(217,194,145,0.16)');
+      glow.addColorStop(1, 'rgba(217,194,145,0)');
+      ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
+
+      const P = [];
+      for (let j = 0; j <= ROWS; j++) { P[j] = []; for (let i = 0; i <= COLS; i++) P[j][i] = project(i, j, yaw); }
+
+      // shaded terrain, far to near
+      for (let j = 0; j < ROWS; j++) {
+        const depth = 1 - j / ROWS;                 // 1 = far
+        const fog = Math.pow(depth, 1.6) * 0.85;
+        for (let i = 0; i < COLS; i++) {
+          const hgt = (HM[j][i] + HM[j][i + 1] + HM[j + 1][i] + HM[j + 1][i + 1]) / 4;
+          const sx = HM[j][i + 1] - HM[j][i];       // slope for lighting
+          const sz = HM[j + 1][i] - HM[j][i];
+          let light = 0.5 + sx * (2.6 + smx * 1.4) - sz * 1.1;
+          light = Math.max(0.08, Math.min(1, light));
+          let col = mixc(DK, MD, light);
+          if (hgt > 0.5)  col = mixc(col, GD, Math.min(1, (hgt - 0.5) * 1.1) * 0.45 * light);
+          if (hgt > 0.82) col = mixc(col, SN, Math.min(1, (hgt - 0.82) * 4.5) * light);
+          col = mixc(col, BG, fog);
+          const a = P[j][i], b = P[j][i + 1], c2 = P[j + 1][i + 1], d = P[j + 1][i];
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c2.x, c2.y); ctx.lineTo(d.x, d.y);
+          ctx.closePath();
+          ctx.fillStyle = `rgb(${col[0] | 0},${col[1] | 0},${col[2] | 0})`;
+          ctx.fill();
+        }
+        // engraved gold contour along the ridge
+        ctx.beginPath();
+        for (let i = 0; i <= COLS; i++) { const p = P[j][i]; i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); }
+        ctx.strokeStyle = `rgba(200,169,107,${0.035 + (1 - depth) * 0.16})`;
+        ctx.lineWidth = 0.75; ctx.stroke();
+      }
+      // luminous summit points
+      for (let j = 0; j <= ROWS; j++) for (let i = 0; i <= COLS; i++) {
+        if (HM[j][i] > 0.86) {
+          const p = P[j][i];
+          ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(240,225,188,${Math.min(0.95, (HM[j][i] - 0.86) * 5)})`;
+          ctx.fill();
+        }
+      }
+      // drifting gold motes with cursor parallax
+      motes.forEach(m => {
+        m.v -= m.sp; if (m.v < -0.05) { m.v = 1.05; m.u = Math.random(); }
+        const x = (m.u + smx * 0.035 * m.s) * W, y = m.v * H;
+        ctx.beginPath(); ctx.arc(x, y, m.s * 1.3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(217,194,145,${0.10 + m.s * 0.16})`; ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('pointermove', e => {
+      const r = hero.getBoundingClientRect();
+      mx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      my = ((e.clientY - r.top) / r.height) * 2 - 1;
+    });
+    hero.addEventListener('pointerleave', () => { mx = 0; my = 0; });
+    resize(); addEventListener('resize', resize); draw();
+  })();
+
+  // ---------- SKYLINE: HD interactive 3D high-rise district ----------
+  (function () {
+    const cv = document.getElementById('city');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+    const tipEl = document.getElementById('citytip');
+    const wrap = cv.parentElement;
+    let W, H, yaw = 0.65, targetYaw = 0.65, pitch = 0.46, grow = 0, growTarget = reduceMotion ? 1 : 0;
+    let dragging = false, lastX = 0, idleT = 0, hover = -1;
+    const rng = (s => () => (s = (s * 16807) % 2147483647) / 2147483647)(1234567);
+    const GX = 8, GZ = 5, S = 58;
+    const classes = ['Industrial', 'Multi-family', 'Retail', 'Hospitality', 'Office', 'Mixed-use'];
+    const cities = ['Toronto', 'Vaughan', 'Mississauga', 'Brampton', 'Oakville'];
+    const names = ['The Meridian','Aurora House','King & Portland','The Ledger','Harbourline','Stonegate',
+      'The Caldwell','Northway Court','The Sovereign','Gilt Row','The Alcott','Queensbridge',
+      'The Verity','Lakeview One','The Hollis','Bridgemont','The Ashworth','Crown Terrace',
+      'The Pemberly','Grange Yard','The Ellery','Vantage Point','The Whitmore','Copper Court',
+      'The Danforth','Silverline','The Rothsay','Parkside 9','The Kensington','Maple & Main',
+      'The Beaumont','Fort York West','The Sinclair','Regent Sq','The Halden','Bay & Adelaide',
+      'The Coventry','Millbrook','The Astor','Wellington Pl'];
+    const B = [];
+    let n = 0;
+    for (let gx = 0; gx < GX; gx++) for (let gz = 0; gz < GZ; gz++) {
+      const cd = Math.hypot(gx - (GX - 1) / 2, gz - (GZ - 1) / 2);
+      const hgt = 55 + rng() * 130 + Math.max(0, (2.4 - cd)) * (70 + rng() * 90);
+      const floors = Math.max(3, Math.floor(hgt / 15));
+      const lit = new Set();
+      for (let f = 0; f < floors * 3; f++) if (rng() < 0.42) lit.add(f);
+      B.push({
+        x: (gx - (GX - 1) / 2) * S + (rng() - 0.5) * 12,
+        z: (gz - (GZ - 1) / 2) * S + (rng() - 0.5) * 12,
+        w: 24 + rng() * 12, h: hgt, floors, lit,
+        spire: hgt > 210,
+        name: names[n % names.length],
+        cls: classes[Math.floor(rng() * classes.length)],
+        city: cities[Math.floor(rng() * cities.length)],
+        cap: (4 + rng() * 3).toFixed(1),
+        delay: n * 0.03
+      });
+      n++;
+    }
+    const MAXD = 260;
+    function resize() {
+      W = wrap.offsetWidth; H = wrap.offsetHeight;
+      cv.width = W * DPR; cv.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    function proj(x, y, z) {
+      const c = Math.cos(yaw), s = Math.sin(yaw);
+      const xr = x * c - z * s, zr = x * s + z * c;
+      const cp = Math.cos(pitch), sp = Math.sin(pitch);
+      const yr = y * cp - zr * sp, z2 = y * sp + zr * cp;
+      const k = 850 / (z2 + 640);
+      return { x: W / 2 + xr * k, y: H * 0.60 - yr * k, d: z2, k };
+    }
+    const lp = (a, b, u) => ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
+    const inPoly = (pts, px, py) => {
+      let c = false;
+      for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+        if ((pts[i].y > py) !== (pts[j].y > py) &&
+            px < (pts[j].x - pts[i].x) * (py - pts[i].y) / (pts[j].y - pts[i].y) + pts[i].x) c = !c;
+      }
+      return c;
+    };
+    let hitZones = [];
+    function render() {
+      ctx.clearRect(0, 0, W, H);
+      const ext = (GX / 2 + 0.9) * S, extZ = (GZ / 2 + 0.9) * S;
+
+      // soft radial glow under the core
+      const c0 = proj(0, 0, 0);
+      const gl = ctx.createRadialGradient(c0.x, c0.y, 0, c0.x, c0.y, W * 0.42);
+      gl.addColorStop(0, 'rgba(200,169,107,0.10)');
+      gl.addColorStop(1, 'rgba(200,169,107,0)');
+      ctx.fillStyle = gl; ctx.fillRect(0, 0, W, H);
+
+      // ground plate + gold street grid
+      const g = [proj(-ext, 0, -extZ), proj(ext, 0, -extZ), proj(ext, 0, extZ), proj(-ext, 0, extZ)];
+      ctx.beginPath(); g.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath();
+      ctx.fillStyle = 'rgba(200,169,107,0.05)'; ctx.fill();
+      ctx.strokeStyle = 'rgba(200,169,107,0.30)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.strokeStyle = 'rgba(200,169,107,0.09)'; ctx.lineWidth = 0.6;
+      for (let gx = -GX / 2; gx <= GX / 2; gx++) {
+        const a = proj(gx * S + S / 2, 0, -extZ), b = proj(gx * S + S / 2, 0, extZ);
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+      for (let gz = -GZ / 2; gz <= GZ / 2; gz++) {
+        const a = proj(-ext, 0, gz * S + S / 2), b = proj(ext, 0, gz * S + S / 2);
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+
+      // far-to-near painter sort
+      const sy = Math.sin(yaw), cy2 = Math.cos(yaw);
+      const order = B.map((b, i) => ({ i, d: b.x * sy + b.z * cy2 })).sort((a, b) => b.d - a.d);
+      hitZones = [];
+
+      order.forEach(({ i, d }) => {
+        const b = B[i];
+        const fog = Math.max(0, Math.min(0.5, (d + MAXD) / (2 * MAXD) * 0.45)); // farther = fainter
+        const vis = 1 - fog;
+        const e = Math.max(0, Math.min(1, (grow - b.delay) * 1.6));
+        const hgt = b.h * (1 - Math.pow(1 - e, 3));
+        const hw = b.w / 2;
+        const bc = [[-hw, -hw], [hw, -hw], [hw, hw], [-hw, hw]];
+        const bot = bc.map(([dx, dz]) => proj(b.x + dx, 0, b.z + dz));
+        const top = bc.map(([dx, dz]) => proj(b.x + dx, hgt, b.z + dz));
+        const hovered = i === hover;
+
+        const faces = [0, 1, 2, 3].map(f => {
+          const f2 = (f + 1) % 4;
+          const pts = [bot[f], bot[f2], top[f2], top[f]];
+          const ang = Math.atan2((bc[f][1] + bc[f2][1]) / 2, (bc[f][0] + bc[f2][0]) / 2);
+          const shade = 0.40 + 0.60 * (0.5 + 0.5 * Math.cos(ang + yaw - 0.7));
+          return { pts, f, d: (pts[0].d + pts[1].d) / 2, shade };
+        }).sort((a, b) => b.d - a.d);
+
+        faces.forEach((fc, fi) => {
+          ctx.beginPath(); fc.pts.forEach((p, k) => k ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath();
+          if (hovered) {
+            ctx.fillStyle = `rgba(200,169,107,${(0.55 * fc.shade + 0.28) * vis + 0.1})`;
+          } else {
+            const v = Math.round((18 + 55 * fc.shade) * vis + 9 * fog * 4);
+            ctx.fillStyle = `rgb(${Math.round(v * 0.55)},${v + 20},${v})`;
+          }
+          ctx.fill();
+          ctx.strokeStyle = hovered ? 'rgba(240,225,188,0.9)' : `rgba(200,169,107,${0.30 * vis})`;
+          ctx.lineWidth = hovered ? 1.4 : 0.7; ctx.stroke();
+          hitZones.push({ pts: fc.pts, i });
+
+          // lit windows on the two nearest (camera-facing) faces
+          if (fi >= 2 && hgt > 30) {
+            const flo = Math.max(2, Math.floor(hgt / 15));
+            const wa = hovered ? 0.95 : (0.30 + fc.shade * 0.45) * vis;
+            ctx.fillStyle = `rgba(240,225,188,${wa})`;
+            for (let fr = 0; fr < flo; fr++) {
+              for (let c = 0; c < 3; c++) {
+                if (!b.lit.has((fr % b.floors) * 3 + c)) continue;
+                const u = 0.22 + c * 0.28;
+                const v0 = (fr + 0.30) / flo, v1 = (fr + 0.62) / flo;
+                const pB0 = lp(fc.pts[0], fc.pts[1], u), pT0 = lp(fc.pts[3], fc.pts[2], u);
+                const q0 = lp(pB0, pT0, v0), q1 = lp(pB0, pT0, v1);
+                const wpx = Math.max(0.8, Math.hypot(fc.pts[1].x - fc.pts[0].x, fc.pts[1].y - fc.pts[0].y) * 0.10);
+                ctx.fillRect(q0.x - wpx / 2, q1.y, wpx, Math.max(0.8, q0.y - q1.y));
+              }
+            }
+          }
+        });
+
+        // roof
+        ctx.beginPath(); top.forEach((p, k) => k ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath();
+        ctx.fillStyle = hovered ? 'rgba(240,225,188,0.95)' : `rgba(200,169,107,${0.5 * vis + 0.06})`;
+        ctx.fill(); ctx.strokeStyle = 'rgba(9,40,32,0.6)'; ctx.stroke();
+        hitZones.push({ pts: top, i });
+
+        // spire + beacon on signature towers
+        const rc = { x: (top[0].x + top[2].x) / 2, y: (top[0].y + top[2].y) / 2 };
+        if (b.spire && e > 0.9) {
+          const tip2 = proj(b.x, hgt + 26, b.z);
+          ctx.beginPath(); ctx.moveTo(rc.x, rc.y); ctx.lineTo(tip2.x, tip2.y);
+          ctx.strokeStyle = `rgba(217,194,145,${0.8 * vis})`; ctx.lineWidth = 1; ctx.stroke();
+          const bg2 = ctx.createRadialGradient(tip2.x, tip2.y, 0, tip2.x, tip2.y, 7);
+          bg2.addColorStop(0, 'rgba(240,225,188,0.95)'); bg2.addColorStop(1, 'rgba(240,225,188,0)');
+          ctx.fillStyle = bg2; ctx.beginPath(); ctx.arc(tip2.x, tip2.y, 7, 0, Math.PI * 2); ctx.fill();
+        }
+        b.topPt = { x: rc.x, y: Math.min(top[0].y, top[1].y, top[2].y, top[3].y) - (b.spire ? 26 : 0) };
+      });
+    }
+    function loop() {
+      grow += (growTarget - grow) * 0.035;
+      if (!dragging) { idleT++; if (idleT > 240) targetYaw += 0.0015; }
+      yaw += (targetYaw - yaw) * 0.08;
+      render();
+      requestAnimationFrame(loop);
+    }
+    wrap.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; idleT = 0; wrap.setPointerCapture(e.pointerId); });
+    addEventListener('pointerup', () => dragging = false);
+    wrap.addEventListener('pointermove', e => {
+      if (dragging) { targetYaw += (e.clientX - lastX) * 0.006; lastX = e.clientX; idleT = 0; return; }
+      const r = wrap.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
+      let found = -1;
+      for (let k = hitZones.length - 1; k >= 0; k--) {
+        if (inPoly(hitZones[k].pts, px, py)) { found = hitZones[k].i; break; }
+      }
+      if (found !== hover) {
+        hover = found;
+        if (hover >= 0) {
+          const b = B[hover];
+          tipEl.innerHTML = `<b>${b.name}</b>${b.cls} · ${b.city} · Cap rate ${b.cap}% · Off-market`;
+          tipEl.style.opacity = 1;
+        } else tipEl.style.opacity = 0;
+      }
+      if (hover >= 0 && B[hover].topPt) {
+        tipEl.style.left = B[hover].topPt.x + 'px';
+        tipEl.style.top = B[hover].topPt.y + 'px';
+      }
+    });
+    wrap.addEventListener('pointerleave', () => { hover = -1; tipEl.style.opacity = 0; });
+    new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { growTarget = 1; o.disconnect(); } }),
+      { threshold: 0.25 }).observe(wrap);
+    resize(); addEventListener('resize', resize);
+    if (reduceMotion) { grow = 1; render(); } else loop();
+  })();
+
+  // ---------- DIVISIONS: one smooth range, four arms ----------
+  (function () {
+    const cv = document.getElementById('range');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+    const wrap = cv.parentElement, tip = document.getElementById('rangetip');
+    const PK = [
+      { u: 0.14, h: 0.95, name: 'White Rock Wealth Management', role: 'Parent Platform', tag: '01 · WEALTH' },
+      { u: 0.40, h: 0.72, name: 'White Rock Commercial Realty', role: 'Regulated Execution Arm', tag: '02 · REALTY' },
+      { u: 0.63, h: 0.84, name: 'White Rock Private Capital', role: 'Private Markets', tag: '03 · CAPITAL' },
+      { u: 0.87, h: 0.62, name: 'White Rock Intelligence', role: 'Proprietary Research', tag: '04 · INTELLIGENCE' }
+    ];
+    const COLS = 84, ROWS = 14;
+    let W, H, mx = 0, smx = 0, hov = -1, t = 0;
+    const gs = (u, v, cu, cv2, s) => Math.exp(-(((u - cu) / s) ** 2 + ((v - cv2) / 0.5) ** 2));
+    const hash = (i, j) => { const s = Math.sin(i * 127.1 + j * 311.7) * 43758.5453; return s - Math.floor(s); };
+    const ss = (a, b, u) => { u = u * u * (3 - 2 * u); return a + (b - a) * u; };
+    const vn = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y); return ss(ss(hash(xi, yi), hash(xi + 1, yi), x - xi), ss(hash(xi, yi + 1), hash(xi + 1, yi + 1), x - xi), y - yi); };
+    const HM = [], SEG = [];
+    for (let j = 0; j <= ROWS; j++) {
+      HM[j] = []; SEG[j] = [];
+      for (let i = 0; i <= COLS; i++) {
+        const u = i / COLS, v = j / ROWS;
+        let hg = vn(i * 0.1, j * 0.24) * 0.10, best = 0, bd = 9;
+        PK.forEach((p, k) => {
+          hg += gs(u, v, p.u, 0.5, 0.085) * p.h;
+          const d = Math.abs(u - p.u); if (d < bd) { bd = d; best = k; }
+        });
+        HM[j][i] = hg; SEG[j][i] = best;
+      }
+    }
+    function resize() { W = wrap.offsetWidth; H = wrap.offsetHeight; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
+    function proj(i, j, yaw) {
+      const x = (i / COLS - 0.5) * 2.5, z0 = (j / ROWS) * 1.9 + 1.15;
+      const c = Math.cos(yaw), s = Math.sin(yaw);
+      const xr = x * c - (z0 - 2) * s, zr = x * s + (z0 - 2) * c + 2;
+      const k = (H * 1.5) / zr;
+      return { x: W / 2 + xr * k, y: H * 0.52 + (-HM[j][i] * 0.62 + 0.42) * k };
+    }
+    const mix = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
+    const TINTS = [[20, 78, 57], [16, 66, 50], [24, 90, 66], [14, 58, 45]], GD = [200, 169, 107], BG = [15, 61, 46];
+    function draw() {
+      t += 0.002; smx += (mx - smx) * 0.07;
+      const yaw = smx * 0.22 + Math.sin(t) * 0.03;
+      ctx.clearRect(0, 0, W, H);
+      const P = [];
+      for (let j = 0; j <= ROWS; j++) { P[j] = []; for (let i = 0; i <= COLS; i++) P[j][i] = proj(i, j, yaw); }
+      for (let j = 0; j < ROWS; j++) {
+        const fog = Math.pow(1 - j / ROWS, 1.7) * 0.7;
+        for (let i = 0; i < COLS; i++) {
+          const seg = SEG[j][i];
+          const light = Math.max(0.15, Math.min(1, 0.55 + (HM[j][i + 1] - HM[j][i]) * (3 + smx)));
+          let col = mix([10, 42, 32], TINTS[seg], light);
+          if (seg === hov) col = mix(col, GD, 0.5);
+          const hgt = HM[j][i];
+          if (hgt > 0.62) col = mix(col, [240, 225, 188], Math.min(1, (hgt - 0.62) * 2.2) * light * 0.8);
+          col = mix(col, BG, fog);
+          const a = P[j][i], b = P[j][i + 1], c2 = P[j + 1][i + 1], d = P[j + 1][i];
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c2.x, c2.y); ctx.lineTo(d.x, d.y); ctx.closePath();
+          ctx.fillStyle = `rgb(${col[0] | 0},${col[1] | 0},${col[2] | 0})`; ctx.fill();
+          if (SEG[j][i + 1] !== seg) { // gold divider between arms
+            ctx.beginPath(); ctx.moveTo(b.x, b.y); ctx.lineTo(c2.x, c2.y);
+            ctx.strokeStyle = `rgba(200,169,107,${0.55 - fog * 0.5})`; ctx.lineWidth = 1; ctx.stroke();
+          }
+        }
+      }
+      // peak markers + labels
+      PK.forEach((p, k) => {
+        const i = Math.round(p.u * COLS), pt = P[Math.round(ROWS * 0.5)][i];
+        const on = k === hov;
+        ctx.beginPath(); ctx.arc(pt.x, pt.y - 6, on ? 4 : 3, 0, Math.PI * 2);
+        ctx.fillStyle = on ? '#F0E1BC' : 'rgba(200,169,107,0.9)'; ctx.fill();
+        ctx.beginPath(); ctx.moveTo(pt.x, pt.y - 6); ctx.lineTo(pt.x, pt.y - 26);
+        ctx.strokeStyle = 'rgba(200,169,107,0.5)'; ctx.lineWidth = 1; ctx.stroke();
+        ctx.font = '600 10px Poppins'; ctx.textAlign = 'center';
+        ctx.fillStyle = on ? '#F0E1BC' : 'rgba(244,241,234,0.7)';
+        ctx.fillText(p.tag, pt.x, pt.y - 33);
+        p.px = pt.x; p.py = pt.y - 40;
+      });
+      requestAnimationFrame(draw);
+    }
+    function pick(e) {
+      const r = wrap.getBoundingClientRect(), u = (e.clientX - r.left) / r.width;
+      mx = u * 2 - 1;
+      let best = -1, bd = 9;
+      PK.forEach((p, k) => { const d = Math.abs(u - p.u); if (d < bd) { bd = d; best = k; } });
+      return best;
+    }
+    wrap.addEventListener('pointermove', e => {
+      const k = pick(e);
+      if (k !== hov) {
+        hov = k;
+        const p = PK[k];
+        tip.innerHTML = `<b>${p.name}</b>${p.role} · Click to view`;
+        tip.style.opacity = 1;
+      }
+      const p = PK[hov];
+      tip.style.left = p.px + 'px'; tip.style.top = p.py + 'px';
+    });
+    wrap.addEventListener('pointerleave', () => { hov = -1; mx = 0; tip.style.opacity = 0; });
+    wrap.addEventListener('click', e => {
+      const k = pick(e), card = document.querySelectorAll('#divisions .div-card')[k];
+      if (!card) return;
+      card.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      card.classList.add('flash'); setTimeout(() => card.classList.remove('flash'), 1600);
+    });
+    resize(); addEventListener('resize', resize);
+    draw();
+  })();
+
+  // ---------- contact form (no backend — informational) ----------
+  function handleSubmit(e) {
     e.preventDefault();
     document.getElementById('formnote').innerHTML =
       '<span style="color:var(--gold)">Thank you — your enquiry has been noted. We will respond with discretion.</span>';
     e.target.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
-  }
-
-  // ---------- capital-flow hero animation ----------
-  const canvas = document.getElementById('flow');
-  const ctx = canvas.getContext('2d');
-  let W, H, nodes = [], particles = [];
-  function resize(){ W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; init(); }
-  function init(){
-    nodes = [];
-    const count = Math.max(6, Math.floor(W / 180));
-    for (let i = 0; i < count; i++){
-      nodes.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*2+1.5 });
-    }
-    particles = [];
-  }
-  function spawn(){
-    if (nodes.length < 2) return;
-    const a = nodes[Math.floor(Math.random()*nodes.length)];
-    let b = nodes[Math.floor(Math.random()*nodes.length)];
-    if (a === b) return;
-    particles.push({ ax:a.x, ay:a.y, bx:b.x, by:b.y, t:0, sp: 0.004 + Math.random()*0.006 });
-  }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    // faint connecting lines
-    ctx.strokeStyle = 'rgba(200,169,107,0.10)';
-    ctx.lineWidth = 1;
-    for (let i=0;i<nodes.length;i++){
-      for (let j=i+1;j<nodes.length;j++){
-        const dx = nodes[i].x-nodes[j].x, dy = nodes[i].y-nodes[j].y;
-        const d = Math.hypot(dx,dy);
-        if (d < W/3){ ctx.globalAlpha = 1 - d/(W/3); ctx.beginPath();
-          ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke(); }
-      }
-    }
-    ctx.globalAlpha = 1;
-    // nodes
-    nodes.forEach(n => {
-      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle = 'rgba(200,169,107,0.5)'; ctx.fill();
-    });
-    // flowing particles
-    particles.forEach((p,idx) => {
-      p.t += p.sp;
-      const x = p.ax + (p.bx-p.ax)*p.t, y = p.ay + (p.by-p.ay)*p.t;
-      ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2);
-      ctx.fillStyle = 'rgba(217,194,145,0.9)'; ctx.fill();
-      // trail glow
-      ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2);
-      ctx.fillStyle = 'rgba(200,169,107,0.15)'; ctx.fill();
-      if (p.t >= 1) particles.splice(idx,1);
-    });
-    if (Math.random() < 0.08) spawn();
-    requestAnimationFrame(draw);
-  }
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
-    resize(); addEventListener('resize', resize); draw();
   }
 </script>
 </body>
